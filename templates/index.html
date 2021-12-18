@@ -1,0 +1,589 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+
+<p>#include &lt;iostream&gt;</p>
+<p>using namespace std;</p>
+<div>class cartItem{<br>   
+    <p class="tab">string name;<br>
+        int quantity; <br>       
+        float price;<br>       
+        int id;<br>
+    </p>
+</div>
+<p>public:</p>    
+<div class="tab">cartItem(){<br>
+    <p class="tab">name = "";<br>        
+        quantity = 0;<br>
+        price = 0;<br>
+        id = 0;
+    </p>
+    }
+</div>
+
+<div class="tab">void setCartItem(string n, int q, float p, int i){<br>
+    <p class="tab">name = n;<br>
+        quantity = q;<br>
+        price = p;<br>
+        id = i;
+    </p>
+    }
+</div>        
+      
+<div class="tab">void Display(){<br>
+    <p class="tab">cout &lt;&lt; "\nItems in the cart-";<br>
+        cout &lt;&lt; "\nItem ID : " &lt;&lt; id;<br>
+        cout &lt;&lt; "\nItem Name : " &lt;&lt; name;<br>
+        cout &lt;&lt; "\nItem Price : Dhs." &lt;&lt; price;<br>
+        cout &lt;&lt; "\nItem Quantity : " &lt;&lt; quantity;<br>
+        cout &lt;&lt; "\n";
+    </p>
+    }
+</div>
+            
+<div class="tab">int getID(){<br>
+    <p class="tab">return id;</p>
+}
+</div> 
+
+<div class="tab">int getQuantity(){<br>
+    <p class="tab">return quantity;</p>
+}
+</div>  
+
+<div class="tab">int getPrice(){<br>
+    <p class="tab">return price;</p>
+}
+</div>
+<p>};</p>
+
+<div>class Item{<br>   
+    <p class="tab">int id;<br>
+        string name;<br>       
+        float price;<br>       
+        int quantity;<br>
+    </p>
+</div>
+<p>public:</p>    
+<div class="tab">Item(){<br>
+    <p class="tab">name = "";<br>        
+        quantity = 0;<br>
+        price = 0;<br>
+        id = 0;
+    </p>
+    }
+</div>
+        
+<div class="tab">void setValues(int i){<br>
+    <p class="tab">id = i;<br>
+        cout &lt;&lt; "\nEnter Item Name: ";<br>
+        cin &gt;&gt; name;<br>
+        cout &lt;&lt; "\nEnter Item Price: Dhs.";<br>
+        cin &gt;&gt; price;<br>
+        cout &lt;&lt; "\nEnter Item Quantity: ";<br>
+        cin &gt;&gt; quantity;
+    </p>
+    }
+</div>
+
+<div class="tab">void Display(){<br>
+    <p class="tab">cout &lt;&lt; "\nItem ID: " &lt;&lt; id;<br>
+        cout &lt;&lt; "\nItem Name: " &lt;&lt; name;<br>
+        cout &lt;&lt; "\nItem Price: Dhs." &lt;&lt; price;<br>
+        cout &lt;&lt; "\nEnter Item Price: Dhs.";<br>
+        cout &lt;&lt; "\nItem Quantity: " &lt;&lt; quantity;<br>
+        cout &lt;&lt; "\n";<br>
+    </p>
+    }
+</div>        
+
+<div class="tab">void modify(){<br>
+    <p class="tab">cout &lt;&lt; "\nEnter New Item Name: ";<br>
+        cin &gt;&gt; name;<br>
+        cout &lt;&lt; "\nEnter New Item Price: Dhs.";<br>
+        cin &gt;&gt; price;<br>
+        cout &lt;&lt; "\nEnter New Item Quantity: ";<br>
+        cin &gt;&gt; quantity;<br>
+        cout &lt;&lt;"\nItem Details Modified!";
+    </p>
+    }
+</div>     
+
+<div class="tab">int getID(){<br>
+    <p class="tab">return id;</p>
+}
+</div> 
+
+<div class="tab">int getQuantity(){<br>
+    <p class="tab">return quantity;</p>
+}
+</div>  
+
+<div class="tab">int getPrice(){<br>
+    <p class="tab">return price;</p>
+}
+</div>
+
+<div class="tab">void modifyQuantity(int q){<br>
+    <p class="tab">quantity -= q;</p>
+}
+</div>
+
+<div class="tab">string getName(){<br>
+    <p class="tab">return name;</p>
+}
+</div>
+<p>};</p>
+        
+<div>class Shop{ 
+<p>public:</p>
+    <p class="tab">Item items[50];<br>
+        int customID, numberOfItems;<br>       
+        Item sortedStack[50];<br>       
+        int top;<br>
+    </p>
+</div>    
+
+<div class="tab">Shop(){
+    <p class="tab">customID = 0;<br>        
+        numberOfItems = 0;<br>
+        top = -1;
+    </p>
+    }
+</div>
+
+<div class="tab">Item returnItemByIndex(int i){
+    <p class="tab">return items[i];</p>
+    }
+</div>
+
+<div class="tab">void DisplaySortByPrice(){
+    <div class="tab"> top =-1;<br>
+        Item tempItems[50];<br>
+        int tempNumberOfItems = numberOfItems;<br>
+        int i,j,k;<br>
+        int maxPrice=0,maxIndex;<br>
+        for(i=0;i&lt;numberOfItems;i++)<br>
+        <p class="tab">tempItems[i] = items[i];</p>   
+        for(i=0;i&lt;numberOfItems;i++){<br>
+            <div class="tab">for(j=0;j&lt;tempNumberOfItems;j++){
+                <div class="tab">if(maxPrice &lt; tempItems[j].getPrice()){<br>
+                    <p class="tab">maxPrice = tempItems[j].getPrice();<br>
+                        maxIndex = j;
+                    </p>
+                }
+                </div>
+            }
+            </div>
+            }<br>
+            pushToStack(tempItems[maxIndex]);<br>
+            maxPrice = 0;<br>
+            for(k=maxIndex;k&lt;tempNumberOfItems;k++){<br>
+                <p class="tab">tempItems[k] = tempItems[k+1];</p>
+                tempNumberOfItems--;<br>
+        }
+    </div>
+    }
+</div>
+
+<div class="tab">void DisplaySortByName(){
+    <div class="tab"> top =-1;<br>
+        Item tempItems[50];<br>
+        int tempNumberOfItems = numberOfItems;<br>
+        int i,j,k;<br>
+        string maxName="";<br>
+        int maxIndex;<br>
+        for(i=0;i&lt;numberOfItems;i++)<br>
+        <p class="tab">tempItems[i] = items[i];</p>   
+        for(i=0;i&lt;numberOfItems;i++){<br>
+            <div class="tab">for(j=0;j&lt;tempNumberOfItems;j++){
+                <div class="tab">if(maxName &lt; tempItems[j].getName()){<br>
+                    <p class="tab">maxName = tempItems[j].getName();<br>
+                    maxIndex = j;</p>
+                }
+                </div>
+                }<br>
+            </div>
+            }<br>
+            pushToStack(tempItems[maxIndex]);<br>
+            maxName = "";<br>
+            for(k=maxIndex;k&lt;tempNumberOfItems;k++){<br>
+                <p class="tab">tempItems[k] = tempItems[k+1];</p>
+                tempNumberOfItems--;<br>
+        }
+    </div>
+    }
+</div>
+
+<div class="tab">void DisplaySortByID(){
+    <div class="tab"> top =-1;<br>
+        Item tempItems[50];<br>
+        int tempNumberOfItems = numberOfItems;<br>
+        int i,j,k;<br>
+        int maxID=0,maxIndex;<br>
+        for(i=0;i&lt;numberOfItems;i++)<br>
+        <p class="tab">tempItems[i] = items[i];</p>   
+        for(i=0;i&lt;numberOfItems;i++){<br>
+            <div class="tab">for(j=0;j&lt;tempNumberOfItems;j++){
+                <div class="tab">if(maxID &lt; tempItems[j].getID()){<br>
+                    <p class="tab">maxID = tempItems[j].getID();<br>
+                    maxIndex = j;</p>
+                }
+                </div>
+                }<br>
+            </div>
+            }<br>
+            pushToStack(tempItems[maxIndex]);<br>
+            maxID = 0;<br>
+            for(k=maxIndex;k&lt;tempNumberOfItems;k++){<br>
+                <p class="tab">tempItems[k] = tempItems[k+1];</p>
+                tempNumberOfItems--;<br>
+        }
+    </div>
+    }
+</div>
+
+<div class="tab">void pushToStack(Item i){
+    <div class="tab">if (top == 50)
+        <p class="tab">cout &lt;&lt; "\nStack Is Full!";</p>
+        else{<br>
+            <p class="tab">top++;<br>
+            sortedStack[top] = i;</p>
+            }
+    </div>
+}
+</div>
+          
+<div class="tab">void printStack(){
+    <div class="tab">int i;<br>
+        int tempTop = top;<br>
+        if (top == -1)
+            <p class="tab">cout &lt;&lt; "\nNothing Added Into Shop!";</p>
+        </div>
+        <div class="tab">
+        else{<br>
+            <div class="tab">for (i = 0; i &lt;= tempTop; i++)
+                <p class="tab">popStack(sortedStack[top]);</p>
+            </div>
+            }
+        </div>
+    }
+    </div>
+</div>
+
+<div class="tab">void popStack(Item i){
+    <div class="tab"> if (top == -1)
+        <p class="tab">cout &lt;&lt; "\nNothing Added Into Shop!";</p>
+    </div>
+    <div class="tab">else{<br>
+        <p class="tab">cout &lt;&lt; "\nItem Name: " &lt;&lt; i.getName();<br>
+            cout &lt;&lt; "\nItem Price: Dhs." &lt;&lt; i.getPrice();<br>
+            cout &lt;&lt; "\nItem Quantity: " &lt;&lt; i.getQuantity();<br>
+            cout &lt;&lt; "\n";<br>
+            top--;
+        </p>
+        }
+        </div>
+    }
+    </div>
+</div>
+
+<div class="tab">void addItem(){
+    <p class="tab">items[numberOfItems].setValues(customID);<br>
+        customID++;<br>
+        numberOfItems++;<br>
+        cout&lt;&lt;"\nItem added to the shop!";
+    </p>
+}
+</div>  
+
+<div class="tab">void deleteItem(){
+    <div class="tab">
+        int k=0, deleteID, i;<br>
+        cout &lt;&lt; "\nEnter The Item ID to be deleted from the shop: ";<br>
+        cin &gt;&gt; deleteID;<br>
+        for (i = 0; i &lt; numberOfItems; i++){<br>
+            <div class="tab">if (items[i].getID() == deleteID)<br>
+                <p class="tab">k = 1;</p>
+            </div>
+            <div class="tab">if (k == 1)<br>
+                <p class="tab">items[i] = items[i + 1];</p>
+            </div>
+        }<br>
+        if (k == 1){
+            <p class="tab">numberOfItems--;<br>
+                cout&lt;&lt;"Item Deleted!";
+            </p>
+        }<br>
+        else<br>
+            <p class="tab">cout &lt;&lt; "\nItem Not Found! Invalid ID!";</p>
+    </div>
+}
+</div>  
+      
+<div class="tab">void modifyItem(){
+    <div class="tab">
+        int ID, i;<br>
+        cout &lt;&lt; "\nEnter Item ID to be modified: ";<br>
+        cin &gt;&gt; ID;<br>
+        for (i = 0; i &lt; numberOfItems; i++){<br>
+            <div class="tab">if (items[i].getID() == ID){<br>
+                <p class="tab">cout &lt;&lt; "\nYou Are Currently Editing: ";<br>
+                    items[i].Display();<br>
+                    items[i].modify();
+                </p>
+            }
+            </div>
+        }<br>
+    </div>
+}
+</div>  
+
+<div class="tab">void DisplayItems(){
+    <div class="tab">
+        int i;<br>
+        cout &lt;&lt;"\nItems in the shop-";<br>
+        if (numberOfItems > 0){<br>
+            <div class="tab">for (i = 0; i &lt; numberOfItems; i++)<br>
+                <p class="tab">items[i].Display();</p>
+            </div>
+        }<br>
+        else<br>
+            <p class="tab">cout &lt;&lt; "\nNothing Added Into Shop!";</p>
+        </div>
+    }
+    </div>
+</div>
+
+<div class="tab">int getItemCount(){<br>
+    <p class="tab">return numberOfItems;</p>
+}
+</div>
+
+<p>};</p>
+        
+<div>void MaintenanceSwitch(Shop &shop){
+    <div class="tab">int choice;<br>
+        <div class="tab">do{
+            <div class="tab">cout &lt;&lt; endl;<br>
+                cout &lt;&lt; "***************************************" &lt;&lt; endl;<br>
+                cout &lt;&lt; "              MAINTENANCE              " &lt;&lt; endl;<br>
+                cout &lt;&lt; "***************************************" &lt;&lt; endl;<br>
+                cout &lt;&lt; "1. Add an item" &lt;&lt; endl;<br>
+                cout &lt;&lt; "2. Delete an item " &lt;&lt; endl;<br>
+                cout &lt;&lt; "3. Modify an item " &lt;&lt; endl;<br>
+                cout &lt;&lt; "4. Display All Items (Sorted by ID)" &lt;&lt; endl;<br>
+                cout &lt;&lt; "5. Display All Items Sorted By Price" &lt;&lt; endl;<br>
+                cout &lt;&lt; "6. Display All Items Sorted By Name" &lt;&lt; endl;<br>
+                cout &lt;&lt; "7. Back to main menu" &lt;&lt; endl;<br>
+                cout &lt;&lt; "***************************************" &lt;&lt; endl;<br>
+                cout &lt;&lt; "Enter your choice: ";<br>
+                cin &gt;&gt; choice;<br>
+                <div class="tab">switch (choice){<br>
+                    <div class="tab">case 1:<br>
+                        <div class="tab">shop.addItem();<br>
+                            break;
+                        </div>
+                    </div>
+                    <div class="tab">case 2:<br>
+                        <div class="tab">shop.DisplayItems();<br>
+                            if (shop.getItemCount() > 0){
+                                <p class="tab">shop.deleteItem();</p>
+                            }<br>
+                            break;
+                        </div>
+                    </div>
+                    <div class="tab">case 3:<br>
+                        <div class="tab">shop.DisplayItems();<br>
+                            if (shop.getItemCount() > 0){
+                                <p class="tab">shop.modifyItem();</p>
+                            }<br>
+                            break;
+                        </div>
+                    </div>
+                    <div class="tab">case 4:<br>
+                        <div class="tab">shop.DisplayItems();<br>
+                            break;
+                        </div>
+                    </div>
+                    <div class="tab">case 5:<br>
+                        <div class="tab">shop.DisplaySortByPrice();<br>
+                            shop.printStack();<br>
+                            break;
+                        </div>
+                    </div>
+                    <div class="tab">case 6:<br>
+                        <div class="tab">shop.DisplaySortByName();<br>
+                            shop.printStack();<br>
+                            break;
+                        </div>
+                    </div>
+                    <div class="tab">case 7:<br>
+                        break;
+                    </div>
+                    <div class="tab">default: cout&lt;&lt;"Wrong choice!"&lt;&lt;endl;<br>
+                        break;
+                    </div>
+                }
+                </div>
+            </div>
+        }while (choice != 7);
+        </div>
+    }
+    </div>
+</div>
+
+<div>void TransactionSwitch(Shop &shop){
+    <div class="tab">int choice, i, k=0, itemsInCart = 0, deleteID, q, totalPrice = 0, tempID;<br>
+        cartItem cart[50];<br>
+        do{
+            <div class="tab">cout &lt;&lt; endl;<br>
+                cout &lt;&lt; "***************************************" &lt;&lt; endl;<br>
+                cout &lt;&lt; "              Transaction              " &lt;&lt; endl;<br>
+                cout &lt;&lt; "***************************************" &lt;&lt; endl;<br>
+                cout &lt;&lt; "1. Add to cart" &lt;&lt; endl;<br>
+                cout &lt;&lt; "2. Remove From Cart" &lt;&lt; endl;<br>
+                cout &lt;&lt; "3. Display Cart" &lt;&lt; endl;<br>
+                cout &lt;&lt; "4. Print Bill " &lt;&lt; endl;<br>
+                cout &lt;&lt; "5. Back to main menu" &lt;&lt; endl;<br>
+                cout &lt;&lt; "***************************************" &lt;&lt; endl;<br>
+                cout &lt;&lt; "Enter your choice: ";<br>
+                cin &gt;&gt; choice;<br>
+                switch (choice){<br>
+                    <div class="tab">case 1:<br>
+                        <div class="tab">shop.DisplayItems();<br>
+                            if (shop.getItemCount() > 0){<br>
+                                <div class="tab">cout &lt;&lt; "\nEnter The Item ID to be added in the Cart: ";<br>
+                                    cin &gt;&gt; tempID;<br>
+                                    for (i = 0; i &lt; shop.getItemCount(); i++){
+                                        <div class="tab">if (shop.items[i].getID() == tempID){<br>
+                                            <div class="tab">cout &lt;&lt; "\nEnter quantity of the item added: ";<br>
+                                                cin &gt;&gt; q;<br>
+                                                if (q &lt;= shop.items[i].getQuantity()){<br>
+                                                    <div class="tab">cart[itemsInCart].setCartItem(shop.items[i].getName(), q, shop.items[i].getPrice(), shop.items[i].getID());
+                                                        shop.items[i].modifyQuantity(q);<br>
+                                                        itemsInCart++;<br>
+                                                        cout&lt;&lt;"Item Added to Cart!";<br>
+                                                    </div>
+                                                }<br>
+                                                else<br>
+                                                <p class="tab">cout &lt;&lt; "\nWe do not have that many in stock!";</p>
+                                            </div>
+                                        }
+                                        </div>
+                                    }
+                                </div>
+                            }<br>
+                        break;
+                        </div>
+                    </div>
+                    <div class="tab">case 2:<br>
+                        <div class="tab">if (itemsInCart > 0){<br>
+                            <div class="tab">for (i = 0; i &lt; itemsInCart; i++)<br>
+                                <p class="tab">cart[i].Display();</p> 
+                            </div>  
+                            <div class="tab">
+                                cout &lt;&lt; "\nEnter The Item ID to be removed from the cart: ";<br>
+                                cin &gt;&gt; deleteID;<br>
+                                for (i = 0; i &lt; itemsInCart; i++){<br>
+                                    <div class="tab">if (cart[i].getID() == deleteID)<br>
+                                        <p class="tab">k = 1;</p>
+                                    </div>
+                                    <div class="tab">if (k == 1)<br>
+                                        <p class="tab">cart[i] = cart[i + 1];</p>
+                                    </div>
+                                }<br>
+                                if (k == 1){
+                                    <p class="tab">itemsInCart--;<br>
+                                        cout&lt;&lt;"Item Deleted!";
+                                    </p>
+                                }<br>
+                                else<br>
+                                    <p class="tab">cout &lt;&lt; "\nItem Not Found! Invalid ID!";</p>
+                            </div>
+                        }
+                        </div>
+                        <div class="tab">
+                            else<br>
+                            <p class="tab">cout &lt;&lt; "\nCart is empty!";</p>
+                            break;
+                        </div>
+                    </div>
+                    <div class="tab">case 3:<br>
+                        <div class="tab">if (itemsInCart > 0){<br>
+                            <div class="tab">for (i = 0; i &lt; itemsInCart; i++)<br>
+                                <p class="tab">cart[i].Display();</p> 
+                            </div> 
+                        } 
+                        </div>
+                        <div class="tab">
+                            else<br>
+                            <p class="tab">cout &lt;&lt; "\nCart is empty!";</p>
+                            break;
+                        </div>
+                    </div>
+                    <div class="tab">case 4:<br>
+                        <div class="tab">
+                            totalPrice = 0;<br>
+                            cout&lt;&lt;"\nItems brought-";<br>
+                            for (i = 0; i &lt; itemsInCart; i++)<br>
+                                <p class="tab">cart[i].Display();</p>
+                            if (itemsInCart > 0){<br>
+                                <div class="tab">for (i = 0; i &lt; itemsInCart; i++)<br>
+                                    <p class="tab"> totalPrice += cart[i].getQuantity() * cart[i].getPrice();</p>
+                                    cout &lt;&lt; "\nTotal Price: Dhs." &lt;&lt; totalPrice;
+                                </div>
+                            }<br>
+                            else<br>
+                            <p class="tab">cout &lt;&lt; "\nCart is empty!";</p>
+                            break;<br>
+                        </div>
+                    </div>
+                    <div class="tab">case 5:
+                        <p class="tab">break;</p>
+                    </div>
+                    <p class="tab">default: cout&lt;&lt;"Wrong choice!"&lt;&lt;endl;<br></p>
+                }
+            </div>
+        }while (choice != 5);
+    </div>
+}
+</div>
+
+<div>int main(){
+    <div class="tab">int choice;<br>
+        Shop shop;<br>
+        do{
+            <div class="tab">cout &lt;&lt; endl;<br>
+                cout &lt;&lt; "***************************************" &lt;&lt; endl;<br>
+                cout &lt;&lt; "Main Menu" &lt;&lt; endl;<br>
+                cout &lt;&lt; "***************************************" &lt;&lt; endl;<br>
+                cout &lt;&lt; "1. Maintenance" &lt;&lt; endl;<br>
+                cout &lt;&lt; "2. Transaction" &lt;&lt; endl;<br>
+                cout &lt;&lt; "3. Exit" &lt;&lt; endl;<br>
+                cout &lt;&lt; "***************************************" &lt;&lt; endl;<br>
+                cout &lt;&lt; "Enter your choice: ";<br>
+                cin &gt;&gt; choice;<br>
+                switch (choice){<br>
+                    <div class="tab">case 1:<br>
+                        <p class="tab">MaintenanceSwitch(shop);<br>
+                        break;
+                        </p>
+                    </div>
+                    <div class="tab">case 2:<br>
+                        <p class="tab">TransactionSwitch(shop);<br>
+                            break;
+                        </p>
+                    </div>
+                    <div class="tab">case 3:
+                        <p class="tab">exit(0);</p>
+                    </div>
+                    <p class="tab">default: cout&lt;&lt;"Wrong choice!"&lt;&lt;endl;<br><p>
+                }
+            </div>
+        }while (choice != 3);<br>
+        return 0;
+    </div>
+}
+</div>
+{% endblock %}
